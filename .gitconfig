@@ -13,6 +13,7 @@
 	s = status --short --branch
 	ss = status --short --branch --untracked=no
 	unstash = stash pop	
+	gpush = !git push --set-upstream gwils `git rev-parse --abbrev-ref HEAD`
 	upush = !git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`
 	push-all    = !sh -c 'git push --all && git push --tags' --
 
