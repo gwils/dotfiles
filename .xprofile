@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Load resources
+
+xrdb -merge .Xresources
+
+# tray
+
+taffybar &
+
+# Clipboard
+
+parcellite &
+
+# default apps
+
+notify-osd &
+xscreensaver -no-splash &
+
+nm-applet &
+
+#background color
+
+xsetroot -solid midnightblue
+
