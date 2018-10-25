@@ -2,9 +2,10 @@
 
 import Control.Arrow ((***), second)
 import Control.Monad
+import Data.Default
 import Data.Maybe
 
-import System.Taffybar.Hooks.PagerHints (pagerHints)
+import System.Taffybar.Support.PagerHints (pagerHints)
 import System.Exit
 
 import XMonad
@@ -22,11 +23,13 @@ import XMonad.Util.Loggers
 import XMonad.Actions.GridSelect
 
 main :: IO ()
-main =
+main = do
+  -- Terrible horrible no good very bad hack to choose the right x settings on system startup
+  spawn "~/.screenlayout/fort.sh"
   -- docks: add dock (panel)
   -- ewmh - lets xmonad talk to panels
   -- pagerhints: add support for Taffybar's current layout and workspaces hints
-  xmonad . docks . ewmh . pagerHints $ defaultConfig
+  xmonad . docks . ewmh . pagerHints $ def
     {
       -- avoid the "strut" (where docks live)
       layoutHook = avoidStruts landscapeLayoutHook
@@ -41,9 +44,11 @@ main =
     --
       ((mod4Mask,               xK_e     ), spawn "thunderbird")
     , ((mod4Mask,               xK_f     ), spawn "firefox")
-    , ((mod4Mask,               xK_g     ), spawn "google-chrome")
+    , ((mod4Mask,               xK_g     ), spawn "google-chrome-stable")
     , ((mod4Mask,               xK_s     ), spawn "sublime")
     , ((mod4Mask .|. shiftMask, xK_z     ), spawn "xscreensaver-command -lock")
+    , ((mod4Mask              , xK_b     ), spawn "~/.screenlayout/fort.sh")
+    , ((mod4Mask .|. shiftMask, xK_b     ), spawn "~/.screenlayout/laptop.sh")
     ]
 
 --

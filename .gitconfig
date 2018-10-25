@@ -18,4 +18,6 @@
 	push-all    = !sh -c 'git push --all && git push --tags' --
 
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /home/gwilson/.gitignore_global
+[url "git://github.com/ghc/packages-"]
+	insteadOf = git://github.com/ghc/packages/
