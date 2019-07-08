@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Load resources
 
@@ -6,6 +6,7 @@ xrdb -merge .Xresources
 
 # tray
 
+status-notifier-watcher &
 taffybar &
 
 # Clipboard
@@ -21,5 +22,6 @@ nm-applet &
 
 #background color
 
-xsetroot -solid midnightblue
+xsetroot -solid black
+xsetroot -cursor_name left_ptr
 

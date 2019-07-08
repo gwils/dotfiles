@@ -38,18 +38,23 @@ main = do
     , manageHook = manageDocks <+> manageHook defaultConfig
     , modMask = mod4Mask
     , terminal = "terminator"
-    } `additionalKeys` [
+    } `additionalKeys` ([
     --
     -- KEYS
     --
-      ((mod4Mask,               xK_e     ), spawn "thunderbird")
+      ((mod4Mask,               xK_m     ), spawn "thunderbird")
     , ((mod4Mask,               xK_f     ), spawn "firefox")
-    , ((mod4Mask,               xK_g     ), spawn "google-chrome-stable")
-    , ((mod4Mask,               xK_s     ), spawn "sublime")
+    , ((mod4Mask,               xK_g     ), spawn "chromium")
     , ((mod4Mask .|. shiftMask, xK_z     ), spawn "xscreensaver-command -lock")
     , ((mod4Mask              , xK_b     ), spawn "~/.screenlayout/fort.sh")
     , ((mod4Mask .|. shiftMask, xK_b     ), spawn "~/.screenlayout/laptop.sh")
-    ]
+    ] ++
+    -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
+    -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
+    [((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (windows . f))
+        | (key, sc) <- zip [xK_a, xK_s, xK_r] [0..]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    )
 
 --
 -- LAYOUT
