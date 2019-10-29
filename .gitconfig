@@ -16,8 +16,11 @@
 	gpush = !git push --set-upstream gwils `git rev-parse --abbrev-ref HEAD`
 	upush = !git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`
 	push-all    = !sh -c 'git push --all && git push --tags' --
+	clon = clone --recursive
 
 [core]
 	excludesfile = /home/gwilson/.gitignore_global
 [url "git://github.com/ghc/packages-"]
 	insteadOf = git://github.com/ghc/packages/
+[url "git@bitbucket.org:"]
+	insteadOf = https://bitbucket.org/
